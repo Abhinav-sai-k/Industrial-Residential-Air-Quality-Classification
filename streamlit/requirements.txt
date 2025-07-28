@@ -1,0 +1,8 @@
+tensorflow
+torch==2.2.0+cpu
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+streamlit
