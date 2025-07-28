@@ -28,7 +28,8 @@ if st.button("Predict"):
     # Load the trained model
     model = binary_nn(input_size=default_input_size)
     try:
-        model.load_state_dict(torch.load("AQ_prediction.pth"))
+        device = 'cuda' if torch.cuda.is_available() else 'cpu'
+        model.load_state_dict(torch.load("AQ_prediction.pth",map_location = torch.device(device)))
         model.eval()  #Setting the model to evaluation mode!
     except FileNotFoundError:
         st.error("Model file 'model.pth' not found. Please ensure the model is saved in the same directory.")
@@ -92,6 +93,7 @@ if st.button("Predict"):
         probability = output.item()
         input_map = dict(enumerate(result_encoder.classes_))
         st.write(input_map)  #I just create a simple map of result set
+        st.write(f"Device in use : {device}")
     
     
     # Display the following results
